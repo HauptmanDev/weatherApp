@@ -1,12 +1,35 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {StatusBar, StyleSheet, Text, View} from 'react-native';
+import {
+    useFonts,
+    Comfortaa_300Light,
+    Comfortaa_400Regular,
+    Comfortaa_500Medium,
+    Comfortaa_600SemiBold,
+    Comfortaa_700Bold,
+} from '@expo-google-fonts/comfortaa';
+import AppLoading from "expo-app-loading";
 
 export const Loading = () => {
-    return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Получение погоды...</Text>
-        </View>
-    );
+
+    let [fontsLoaded] = useFonts({
+        Comfortaa_300Light,
+        Comfortaa_400Regular,
+        Comfortaa_500Medium,
+        Comfortaa_600SemiBold,
+        Comfortaa_700Bold,
+    });
+
+    if (!fontsLoaded) {
+        return <AppLoading />;
+    } else {
+        return (
+            <View style={styles.container}>
+                <StatusBar color={'black'} backgroundColor={'#FDF6AA'} barStyle={'dark-content'}/>
+                <Text style={{...styles.text, fontFamily: 'Comfortaa_400Regular'}}>Loading...</Text>
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
@@ -20,6 +43,6 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "#2c2c2c",
-        fontSize: 30
+        fontSize: 20,
     }
 });
